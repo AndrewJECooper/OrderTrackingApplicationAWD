@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Login;
+    namespace App;
     require_once "Connector.php";
     use \PDO;
     use App\IDatabase;
