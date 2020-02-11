@@ -6,7 +6,6 @@
     use PDO;
     use App\Login;
     use App\PDO_DB;
-   
 
     $dbServer = "mysql:host=localhost;dbname=awd_assignment";
     $dbUser = "root";

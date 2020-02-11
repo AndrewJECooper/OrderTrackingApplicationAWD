@@ -33,13 +33,6 @@
         //Methods
         public function CheckLogin($email, $password, $link)
         {
-            /*
-            $query = "SELECT * FROM users WHERE Email LIKE '$email' AND Password LIKE '$password'";
-            $statement = $link->prepare($query);
-            $statement->execute(array($email,$password));
-    
-            $num = $statement->rowCount();
-    */
             $query = "SELECT * FROM users WHERE Email LIKE ? AND Password LIKE ?";
             $statement = $link->prepare($query);
             $statement->execute([$email,$password]);

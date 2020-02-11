@@ -44,7 +44,7 @@
     $dbPwd = "";
 
     $link = new PDO($dbServer, $dbUser, $dbPwd);
-    $stmt = $link->prepare("SELECT o.Id, o.ItemDescription, os.Description FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.StatusId ASC");
+    $stmt = $link->prepare("SELECT o.Id, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
     $stmt->execute();
     $orders = $stmt->fetchAll();
 ?>
@@ -60,6 +60,7 @@
                         <h3 class = "card-title text-center"><?php echo $order['Id'];?></h5>
                         <h5 class = "card-subtitle text-center text-muted"><?php echo $order['Description'];?></h5>
                         <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
+                        <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
                         <a href = "CancelOrder.php" class = "btn btn-default"> Cancel Order </button></a>
                     </div>
                 </div>
