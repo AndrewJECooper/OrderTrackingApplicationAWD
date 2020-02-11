@@ -13,7 +13,7 @@
 <body>
     <main id = "main-section">
         <div class = "row m-5">
-            <div class = "col-sm-12">
+            <div class = "col-xs-12">
                 <h1> Welcome to your parcel tracker! </h1>
                 <h5> Log in to find out details of your orders </h5>
                 <form action = "Connector.php" method = "POST">

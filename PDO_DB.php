@@ -39,11 +39,12 @@ class PDO_DB extends PDO
         
     }
 
-    public function WriteToDatabase($add1, $add2, $customerId, $postcode, $description, $email, $dateAdded, $link)
+    public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode, $link)
     {
-        $stmt = "INSERT INTO orders(CustomerId, AddressLine1, AddressLine2, Postcode, ItemDescription, DateAdded) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        session_start();
+        $stmt = "INSERT INTO orders(CustomerId, StatusId, DateAdded, ItemDescription, AddressLine1, AddressLine2, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $link->prepare($stmt);
-        $stmt->execute([$customerId, $add1, $add2, $postcode, $description, $email, $dateAdded]);
+        $stmt->execute([$customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode]);
     }
 
     public function RemoveFromDatabase()

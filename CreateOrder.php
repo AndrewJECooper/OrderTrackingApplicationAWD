@@ -25,7 +25,7 @@
                     <a class="nav-item nav-link" href="OrderCheck.php">Home</a>
                     <a class="nav-item nav-link active" href="CreateOrder.php">Create Order<span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="Contact.php">Contact Us</a>
-                    <a class="nav-item nav-link" href="signout.php">Sign out</a>
+                    <a class="nav-item nav-link" href="Signout.php">Sign out</a>
                 </div>
             </div>
         </nav>
@@ -35,7 +35,7 @@
         <div class = "row text-center m-5"> 
             <div class = "col-sm-12">
                 <h1> Welcome to your parcel tracker! </h1>
-                <h5> Log in to find out details of your orders </h5>
+                <h5> Create new orders here <?echo $_SESSION["Email"]; ?></h5>
                 <form action = "InsertOrderCon.php" method = "POST">
                     <div class = "form-group">
                         <label for = "AddressL1"> Address Line 1 </label>
@@ -62,7 +62,8 @@
 }
 else 
 {
-    header("Location: index.php");
+    echo "Hello";
+    header("Location: CreateOrder.php");
 }
 ?>
 </body>
