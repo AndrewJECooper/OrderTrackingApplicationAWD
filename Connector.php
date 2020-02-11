@@ -13,8 +13,16 @@
 
     $link = new PDO($dbServer, $dbUser, $dbPwd); 
 
-    $email = $_POST["Email"];
-    $password = $_POST["Password"];
+    if(isset($_POST["Email"]) && isset($_POST["Password"]))
+    {
+        $email = $_POST["Email"];
+        $password = $_POST["Password"];
+    }
+    else
+    {
+        header("Location: index.php");
+    }
+    
 
     $conn = new Login();
     $conn->CheckLogin($email, $password, $link);

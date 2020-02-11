@@ -39,7 +39,7 @@ class PDO_DB extends PDO
         
     }
 
-    public function WriteToDatabase($add1, $add2, $customerId, $postcode, $description, $email, $dateAdded)
+    public function WriteToDatabase($add1, $add2, $customerId, $postcode, $description, $email, $dateAdded, $link)
     {
         $stmt = "INSERT INTO orders(CustomerId, AddressLine1, AddressLine2, Postcode, ItemDescription, DateAdded) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $link->prepare($stmt);

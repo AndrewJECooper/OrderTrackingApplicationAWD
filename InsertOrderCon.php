@@ -1,10 +1,13 @@
 <?php
+
+    namespace App;
     require_once "CreateOrder.php";
     require_once "PDO_DB.php";
-    use App\PDO_DB;
     use PDO;
+    use App\PDO_DB;
+ 
 
-    //session_start();
+    session_start();
     $email = $_SESSION["Email"];
 
     $address1 = $_POST['Address1'];
@@ -24,5 +27,5 @@
 
 
     $link = new PDO_DB();
-    $link->WriteToDatabase($address1, $address2, $customerId, $postcode, $description, $email, $dateAdded);
+    $link->WriteToDatabase($address1, $address2, $customerId, $postcode, $description, $email, $dateAdded, $link);
 ?>
