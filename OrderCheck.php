@@ -54,7 +54,7 @@
     <?
     foreach($orders as $order)
     { ?>    
-            <div class = "col-3">
+            <div class = "col-4">
                 <div class = "card m-3">              
                     <div class = "card-body">
                         <h3 class = "card-title text-center"><?php echo $order['Id'];?></h5>
