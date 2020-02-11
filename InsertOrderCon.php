@@ -10,6 +10,12 @@
     session_start();
     $_SESSION["Email"];
 
+    $dbServer = "mysql:host=localhost;dbname=awd_assignment";
+    $dbUser = "root";
+    $dbPwd = "";
+
+    $link = new PDO($dbServer, $dbUser, $dbPwd); 
+
     if(isset($_POST["Address1"]) && isset($_POST["Address2"]) && isset($_POST["Postcode"]) && isset($_POST["Description"]))
     {
         $address1 = $_POST["Address1"];
@@ -23,15 +29,25 @@
     }
 
     $dateAdded = date('Y-m-d H:i:s');
-    $customerId = 3;
+
+    $stmt = $link->prepare("SELECT Id FROM users WHERE Email = '{$_SESSION['Email']}'");
+    $query->execute();
+
+    $num = $statement->rowCount();
+    if($num == 1)
+    {
+        $customerId =  $row['Id'];
+    }
+    else
+    {
+        echo "Can't find";
+    }
+
+    //$customerId = 3;
     $statusId = 1;
  
     /* NEED TO CHANGE ALL THESE TO USE THE PDO_DB CLASS (Connector, InsertOrderCon etc...*/
-    $dbServer = "mysql:host=localhost;dbname=awd_assignment";
-    $dbUser = "root";
-    $dbPwd = "";
-
-    $link = new PDO($dbServer, $dbUser, $dbPwd); 
+ 
     $con = new PDO_DB();
     $con->WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode, $link)
 ?>
