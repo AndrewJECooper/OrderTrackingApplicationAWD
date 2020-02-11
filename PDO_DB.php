@@ -6,7 +6,7 @@ require_once "Connector.php";
 use \PDO;
 use App\IDatabase;
 
-class PDO_DB extends PDO
+class PDO_DB extends PDO implements IDatabase
 {
     //Attributes
     private $_dbServer = "mysql:host=localhost; dbname=awd_assignment";
@@ -17,20 +17,9 @@ class PDO_DB extends PDO
     //Construct
     public function __construct()
     {
-        $dbServer = $this->_dbServer;
-        $dbUser = $this->_dbUser;
-        $dbPwd = $this->_dbPwd;
-
-        try
-        {
-            $link = new PDO($dbServer, $dbUser, $dbPwd);
-            $this->_link = $link;
-        }
-        catch(Exception $errorMessage)
-        {
-            echo "Unable to connect to database";
-        }
+        $this->_link = new PDO($this->_dbServer, $this->_dbUser, $this->_dbPwd);
     }
+
     //Methods for properties
 
     //Methods

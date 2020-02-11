@@ -12,6 +12,7 @@
     $dbPwd = "";
 
     $link = new PDO($dbServer, $dbUser, $dbPwd); 
+    //$link = new PDO_DB();
 
     if(isset($_POST["Email"]) && isset($_POST["Password"]))
     {
