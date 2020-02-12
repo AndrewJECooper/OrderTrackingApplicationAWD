@@ -62,8 +62,7 @@
 }
 else 
 {
-    echo "Hello";
-    header("Location: CreateOrder.php");
+    header("Location: OrderCheck.php");
 }
 ?>
 </body>

@@ -49,7 +49,7 @@
     $orders = $stmt->fetchAll();
 ?>
 
-    <div class = "container" id= "UserItems">
+    <div class = "container">
         <div class = "row mt-5">
     <?
     foreach($orders as $order)
