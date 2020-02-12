@@ -7,15 +7,6 @@
     use App\PDO_DB;
  
     session_start();
-<<<<<<< HEAD
-=======
-
-    $dbServer = "mysql:host=localhost;dbname=awd_assignment";
-    $dbUser = "root";
-    $dbPwd = "";
-
-    $link = new PDO($dbServer, $dbUser, $dbPwd); 
->>>>>>> f477c61a3e05efd14bddf15f0707b6c1bb8fcdcd
 
     if(isset($_POST["Address1"]) && isset($_POST["Address2"]) && isset($_POST["Postcode"]) && isset($_POST["Description"]))
     {
@@ -38,14 +29,9 @@
 
     $statusId = 1;
 
-<<<<<<< HEAD
-    $link = new PDO_DB();
-    $link->WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode);
-    
-=======
     $con = new PDO_DB();
-    $con->WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode, $link);
->>>>>>> f477c61a3e05efd14bddf15f0707b6c1bb8fcdcd
+    $con->WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode);
+
 
     header("Location: OrderCheck.php");
 ?>
