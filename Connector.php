@@ -15,7 +15,6 @@
         header("Location: index.php");
     }
     
-
     $conn = new PDO_DB();
     $conn->CheckUser($email, $password);
 ?>

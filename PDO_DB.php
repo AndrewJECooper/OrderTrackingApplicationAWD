@@ -34,6 +34,8 @@ class PDO_DB extends PDO implements IDatabase
         $stmt = "INSERT INTO orders(CustomerId, StatusId, DateAdded, ItemDescription, AddressLine1, AddressLine2, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->_link->prepare($stmt);
         $stmt->execute([$customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode]);
+
+        header("Location: OrderCheck.php");
     }
 
     public function RemoveFromDatabase()
@@ -41,6 +43,11 @@ class PDO_DB extends PDO implements IDatabase
 
     }
     public function UpdateInfoDatabase()
+    {
+        
+    }
+
+    public function GetUserId()
     {
         
     }
