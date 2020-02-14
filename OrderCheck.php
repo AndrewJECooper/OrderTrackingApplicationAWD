@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    if(@$_SESSION["Email"])
+    {
+?>
+<?php
+    /*use App\PDO_DB;
+    require_once "PDO_DB.php"; 
+    $link = new PDO_DB();*/
+
+    $dbServer = "mysql:host=localhost; dbname=awd_assignment";
+    $dbUser = "root";
+    $dbPwd = "";
+ 
+    $link = new PDO($dbServer, $dbUser, $dbPwd);
+
+    $stmt = $link->prepare("SELECT o.Id, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
+    $stmt->execute();
+    $orders = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <head>
     <title>Order Tracker | Current Orders </title>
@@ -7,11 +27,7 @@
 
      <!-- Scripts -->
 </head>
-<?php
-    session_start();
-    if(@$_SESSION["Email"])
-    {
-?>
+
 <body>
 <header id="main-header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,17 +53,6 @@
 
     <h1 class = "text-center m-5"> Welcome <?php echo $_SESSION["Email"]; ?> </h1>
     <h3 class = "text-center"> Here is a list of your orders </h3>
-
-    <?php
-    $dbServer = "mysql:host=localhost; dbname=awd_assignment";
-    $dbUser = "root";
-    $dbPwd = "";
-
-    $link = new PDO($dbServer, $dbUser, $dbPwd);
-    $stmt = $link->prepare("SELECT o.Id, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
-    $stmt->execute();
-    $orders = $stmt->fetchAll();
-?>
 
     <div class = "container">
         <div class = "row mt-5">

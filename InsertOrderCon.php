@@ -3,7 +3,7 @@
     namespace App;
     require_once "CreateOrder.php";
     require_once "PDO_DB.php";
-    use PDO;
+    //use PDO;
     use App\PDO_DB;
  
     session_start();
@@ -30,10 +30,14 @@
     $stmt->execute();
     $result = $stmt->fetchAll();
     $customerId = $result[0]['Id'];
-
+    
     $statusId = 1;
 
     
     $link->WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode);
+
+    header("Location: OrderCheck.php");
+
+    print_r($customerId);
 
 ?>
