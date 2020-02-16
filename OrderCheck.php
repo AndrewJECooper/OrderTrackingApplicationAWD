@@ -1,13 +1,10 @@
 <?php
     session_start();
+    require_once "PDO_DB.php";
     if(@$_SESSION["Email"])
     {
 ?>
 <?php
-    /*use App\PDO_DB;
-    require_once "PDO_DB.php"; 
-    $link = new PDO_DB();*/
-
     $dbServer = "mysql:host=localhost; dbname=awd_assignment";
     $dbUser = "root";
     $dbPwd = "";

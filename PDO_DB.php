@@ -41,14 +41,15 @@ class PDO_DB extends PDO implements IDatabase
         
     }
 
-    public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode)
+    public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode, $link)
     {
         session_start();
+        $_SESSION["Email"];
         $stmt = "INSERT INTO orders(CustomerId, StatusId, DateAdded, ItemDescription, AddressLine1, AddressLine2, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->_link->prepare($stmt);
+        $stmt = $link->prepare($stmt);
         $stmt->execute([$customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode]);
 
-        header("Location: OrderCheck.php");
+        //header("Location: OrderCheck.php");
     }
 
     public function RemoveFromDatabase()

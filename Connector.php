@@ -9,12 +9,8 @@
     {
         $email = $_POST["Email"];
         $password = $_POST["Password"];
-    }
-    else
-    {
-        header("Location: index.php");
-    }
-    
-    $conn = new PDO_DB();
-    $conn->CheckUser($email, $password);
+
+        $conn = new PDO_DB();
+        $conn->CheckUser($email, $password);
+    }    
 ?>
