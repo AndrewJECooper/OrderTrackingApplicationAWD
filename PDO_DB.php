@@ -41,15 +41,11 @@ class PDO_DB extends PDO implements IDatabase
         
     }
 
-    public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode, $link)
+    public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode)
     {
-        session_start();
-        $_SESSION["Email"];
         $stmt = "INSERT INTO orders(CustomerId, StatusId, DateAdded, ItemDescription, AddressLine1, AddressLine2, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $link->prepare($stmt);
+        $stmt = $this->_link->prepare($stmt);
         $stmt->execute([$customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode]);
-
-        //header("Location: OrderCheck.php");
     }
 
     public function RemoveFromDatabase()
@@ -61,9 +57,14 @@ class PDO_DB extends PDO implements IDatabase
         
     }
 
-    public function GetUserId()
+    public function GetUserId($email)
     {
-        
+        $stmt = $this->_link->prepare("SELECT Id FROM users WHERE Email = '{$_SESSION['Email']}'");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $customerId = $result[0]['Id'];
+
+        return $customerId;
     }
 
     public function CheckUser($email, $password)

@@ -10,7 +10,7 @@
         $email = $_POST["Email"];
         $password = $_POST["Password"];
 
-        $conn = new PDO_DB();
-        $conn->CheckUser($email, $password);
+        $link = new PDO_DB();
+        $link->CheckUser($email, $password);
     }    
 ?>
