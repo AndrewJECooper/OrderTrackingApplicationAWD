@@ -30,7 +30,6 @@ class PDO_DB extends PDO implements IDatabase
 
         while($orders = $stmt->fetchAll())
         {
-            //return(['Id', 'ItemDescription', 'Description', 'DateAdded']);
             return $orders;
         }
     }
@@ -47,14 +46,30 @@ class PDO_DB extends PDO implements IDatabase
 		
 	}
 
-    public function QueryDatabase($email)
+    public function QueryDatabase($query)
     {
-        
+        $stmt = $this->_link->prepare("SELECT * FROM orders WHERE ItemDescription LIKE % ? %");
+        $stmt->execute([$query]);
+
+        while($orders = $stmt->fetchAll())
+        {
+            return $orders;
+        }
     }
 
     public function UpdateStatus($id)
     {
-        //$stmt = $this->_link->prepare("UPDATE orders")
+        if($statusId == 1)
+        {
+            $stmt = $this->_link->prepare("UPDATE orders SET StatusId = 2");
+            $stmt->execute();
+        }
+        else
+        {
+            $stmt = $this->_link->prepare("UPDATE orders SET StatusId = 3");
+            $stmt->execute();
+        }
+        
     }
 
     public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode)

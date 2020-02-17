@@ -32,8 +32,8 @@
                 <a class="nav-item nav-link active" href="OrderCheck.php">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="CreateOrder.php">Create Order</a>
                 <a class="nav-item nav-link" href="Contact.php">Contact Us</a>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline" action="QueryLink.php" method = "POST">
+                    <input class="form-control mr-sm-2" type="search" name = "search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  
                 </form>
                 <a class="nav-item nav-link" href="Signout.php">Sign out</a>
@@ -85,6 +85,7 @@
                             <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                             <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
                             <a href = "CancelOrder.php" class = "btn btn-default"> Cancel Order </button></a>
+                            <a href = "FullDetails.php" class = "btn btn-default"> View Details </button></a>
                         </div>
                     </div>
                 </div>
