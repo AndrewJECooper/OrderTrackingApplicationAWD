@@ -35,6 +35,18 @@ class PDO_DB extends PDO implements IDatabase
         }
     }
 
+    public function GetAOrders($id)
+	{	
+		$stmt = $this->_link->prepare("SELECT o.Id, u.FirstName, u.Surname, u.Email, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE os.Id = '1' ORDER BY o.DateAdded ASC");
+        $stmt->execute();
+
+        while($orders = $stmt->fetchAll())
+        {
+            return $orders;
+        }
+		
+	}
+
     public function QueryDatabase($email)
     {
         

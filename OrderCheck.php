@@ -8,6 +8,7 @@
 <?php
     $link = new PDO_DB();
     $orders = $link->GetOrders($_SESSION["Email"]);
+    $admin = $link->GetUserId($_SESSION["Email"]);
 ?>
 <!DOCTYPE html>
 <head>
@@ -43,25 +44,50 @@
 </header>
 
     <h1 class = "text-center m-5"> Welcome <?php echo $_SESSION["Email"]; ?> </h1>
-    <h3 class = "text-center"> Here is a list of your orders </h3>
+    
 
+    <?if($admin == 1)
+		{?>
+    <h3 class = "text-center"> Here is a list of incomplete orders </h3>
     <div class = "container">
         <div class = "row mt-5">
-    <?
-    foreach($orders as $order)
-    { ?>    
-            <div class = "col-4">
+			<?$adminOrders = $link->GetAOrders($admin);
+			foreach($adminOrders as $order){?>
+            <div class = "col-sm-12 col-md-4">
                 <div class = "card m-3">              
                     <div class = "card-body">
                         <h3 class = "card-title text-center"><?php echo $order['Id'];?></h5>
-                        <h5 class = "card-subtitle text-center text-muted"><?php echo $order['Description'];?></h5>
+                        <p class = "text-center"><?php echo $order['FirstName'];?></p>
+                        <p class = "text-center"><?php echo $order['Surname'];?></p>
+                        <p class = "text-center"><?php echo $order['Email'];?></p>
                         <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                         <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
-                        <a href = "CancelOrder.php" class = "btn btn-default"> Cancel Order </button></a>
                     </div>
                 </div>
             </div>
-    <?
+			<?}
+		}
+		elseif(empty($orders)){ ?>
+            <h4 class = "text-center"> You have no orders to show </h4>
+        <?}
+        else {?>
+        <h3 class = "text-center"> Here is a list of your orders </h3>
+        <div class = "container">
+            <div class = "row mt-5">
+            <? foreach($orders as $order){?>
+                <div class = "col-sm-12 col-md-4">
+                    <div class = "card m-3">              
+                        <div class = "card-body">
+                            <h3 class = "card-title text-center"><?php echo $order['Id'];?></h5>
+                            <h5 class = "card-subtitle text-center text-muted"><?php echo $order['Description'];?></h5>
+                            <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
+                            <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
+                            <a href = "CancelOrder.php" class = "btn btn-default"> Cancel Order </button></a>
+                        </div>
+                    </div>
+                </div>
+            <?} ?>
+        <?
     }
     ?>
         </div>
