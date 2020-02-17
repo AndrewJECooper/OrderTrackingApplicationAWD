@@ -52,6 +52,11 @@ class PDO_DB extends PDO implements IDatabase
         
     }
 
+    public function UpdateStatus($id)
+    {
+        //$stmt = $this->_link->prepare("UPDATE orders")
+    }
+
     public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode)
     {
         $stmt = "INSERT INTO orders(CustomerId, StatusId, DateAdded, ItemDescription, AddressLine1, AddressLine2, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?)";

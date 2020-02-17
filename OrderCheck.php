@@ -62,6 +62,8 @@
                         <p class = "text-center"><?php echo $order['Email'];?></p>
                         <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                         <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
+                        <a href = "UpdateStatus.php" class ="btn btn-default"> Update Status </button></a>
+                        <a href = "RemoveOrder.php" class = "btn btn-default"> Remove Order </button></a>
                     </div>
                 </div>
             </div>
