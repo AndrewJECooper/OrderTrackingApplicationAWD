@@ -1,19 +1,13 @@
 <?php
     session_start();
     require_once "PDO_DB.php";
+    use App\PDO_DB;
     if(@$_SESSION["Email"])
     {
 ?>
 <?php
-    $dbServer = "mysql:host=localhost; dbname=awd_assignment";
-    $dbUser = "root";
-    $dbPwd = "";
- 
-    $link = new PDO($dbServer, $dbUser, $dbPwd);
-
-    $stmt = $link->prepare("SELECT o.Id, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
-    $stmt->execute();
-    $orders = $stmt->fetchAll();
+    $link = new PDO_DB();
+    $orders = $link->GetOrders($_SESSION["Email"]);
 ?>
 <!DOCTYPE html>
 <head>
