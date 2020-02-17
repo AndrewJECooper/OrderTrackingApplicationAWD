@@ -75,7 +75,7 @@ class PDO_DB extends PDO implements IDatabase
             $num = $statement->rowCount();
             if($num == 1)
                 {
-                    $_SESSION["Email"] = $email;
+                    session_start();
                     header("Location: OrderCheck.php");
                 }
             else
