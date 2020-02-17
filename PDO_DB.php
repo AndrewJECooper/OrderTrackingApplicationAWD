@@ -47,7 +47,7 @@ class PDO_DB extends PDO implements IDatabase
 
     public function QueryDatabase($query)
     {
-        $stmt = $this->_link->prepare("SELECT * FROM orders WHERE ItemDescription LIKE %?%");
+        $stmt = $this->_link->prepare("SELECT * FROM orders WHERE ItemDescription LIKE % ? %");
         $stmt->execute([$query]);
 
         while($orders = $stmt->fetchAll())

@@ -69,7 +69,7 @@
                         <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                         <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
                         <a href = "UpdateStatus.php?orderId=<?php echo $order['Id'];?>&statusId=<?php echo $order['StatusId'];?>" class ="btn btn-default"> Update Status </button></a>
-                        <a href = "RemoveOrder.php" class = "btn btn-default"> Remove Order </button></a>
+                        <a href = "RemoveOrder.php?orderId=<?php echo $order['Id'];?>" class = "btn btn-default"> Remove Order </button></a>
                     </div>
                 </div>
             </div>

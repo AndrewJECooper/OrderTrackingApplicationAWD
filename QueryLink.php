@@ -48,14 +48,14 @@
     <h3 class = "text-center mt-5"> Here is a list of your queryable items </h3>
         <div class = "container">
             <div class = "row mt-5">
-            <? while($orders){?>
+            <? foreach($orders as $order){?>
                 <div class = "col-sm-12 col-md-4">
                     <div class = "card m-3">              
                         <div class = "card-body">
-                            <h3 class = "card-title text-center"><?php echo $orders['Id'];?></h5>
-                            <h5 class = "card-subtitle text-center text-muted"><?php echo $orders['Description'];?></h5>
-                            <p class = "text-center"><?php echo $orders['ItemDescription'];?></p>
-                            <p class = "text-center text-muted"><?php echo $orders['DateAdded'];?></p>
+                            <h3 class = "card-title text-center"><?php echo $order['Id'];?></h5>
+                            <h5 class = "card-subtitle text-center text-muted"><?php echo $order['Description'];?></h5>
+                            <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
+                            <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
                             <a href = "CancelOrder.php" class = "btn btn-default"> Cancel Order </button></a>
                             <a href = "FullDetails.php" class = "btn btn-default"> View Details </button></a>
                         </div>
