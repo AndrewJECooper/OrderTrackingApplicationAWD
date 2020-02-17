@@ -26,7 +26,6 @@ class PDO_DB extends PDO implements IDatabase
     {
         $stmt = $this->_link->prepare("SELECT o.Id, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
         $stmt->execute();
-        //$orders = $stmt->fetch();
 
         while($orders = $stmt->fetchAll())
         {
@@ -36,7 +35,7 @@ class PDO_DB extends PDO implements IDatabase
 
     public function GetAOrders($id)
 	{	
-		$stmt = $this->_link->prepare("SELECT o.Id, u.FirstName, u.Surname, u.Email, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE os.Id = '1' ORDER BY o.DateAdded ASC");
+		$stmt = $this->_link->prepare("SELECT o.Id, u.FirstName, u.Surname, u.Email, o.ItemDescription, os.Description, o.Id as statusId, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE os.Id != '3' ORDER BY o.DateAdded DESC");
         $stmt->execute();
 
         while($orders = $stmt->fetchAll())
@@ -48,7 +47,7 @@ class PDO_DB extends PDO implements IDatabase
 
     public function QueryDatabase($query)
     {
-        $stmt = $this->_link->prepare("SELECT * FROM orders WHERE ItemDescription LIKE % ? %");
+        $stmt = $this->_link->prepare("SELECT * FROM orders WHERE ItemDescription LIKE %?%");
         $stmt->execute([$query]);
 
         while($orders = $stmt->fetchAll())
@@ -57,17 +56,17 @@ class PDO_DB extends PDO implements IDatabase
         }
     }
 
-    public function UpdateStatus($id)
+    public function UpdateStatus($orderId, $statusId)
     {
         if($statusId == 1)
         {
-            $stmt = $this->_link->prepare("UPDATE orders SET StatusId = 2");
-            $stmt->execute();
+            $stmt = $this->_link->prepare("UPDATE orders SET StatusId = '2' WHERE Id LIKE ?");
+            $stmt->execute([$orderId]);
         }
         else
         {
-            $stmt = $this->_link->prepare("UPDATE orders SET StatusId = 3");
-            $stmt->execute();
+            $stmt = $this->_link->prepare("UPDATE orders SET StatusId = '3' WHERE Id Like ?");
+            $stmt->execute([$orderId]);
         }
         
     }
@@ -79,10 +78,12 @@ class PDO_DB extends PDO implements IDatabase
         $stmt->execute([$customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode]);
     }
 
-    public function RemoveFromDatabase()
+    public function RemoveFromDatabase($id)
     {
-
+        $stmt = $this->_link->prepare("DELETE FROM orders WHERE Id = ?");
+        $stmt->execute([$id]);
     }
+
     public function UpdateInfoDatabase()
     {
         

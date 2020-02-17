@@ -7,5 +7,6 @@
 
     $link = new PDO_DB();
 
-    //$link->UpdateStatus();
+    $link->UpdateStatus(1, 1);
+    header("Location: OrderCheck.php");
 ?>

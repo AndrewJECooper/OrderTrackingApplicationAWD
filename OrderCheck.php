@@ -56,13 +56,14 @@
             <div class = "col-sm-12 col-md-4">
                 <div class = "card m-3">              
                     <div class = "card-body">
-                        <h3 class = "card-title text-center"><?php echo $order['Id'];?></h5>
+                        <h3 class = "card-title text-center" name="orderId"><?php echo $order['Id'];?></h5>
+                        <p class = "text-center" name = "statusId"><?php echo $order['statusId'];?></p>
                         <p class = "text-center"><?php echo $order['FirstName'];?></p>
                         <p class = "text-center"><?php echo $order['Surname'];?></p>
                         <p class = "text-center"><?php echo $order['Email'];?></p>
                         <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                         <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
-                        <a href = "UpdateStatus.php" class ="btn btn-default"> Update Status </button></a>
+                        <a href = "UpdateStatus.php?orderId=<?php echo $order['Id']&$statusId=$order['statusId'];?>" class ="btn btn-default"> Update Status </button></a>
                         <a href = "RemoveOrder.php" class = "btn btn-default"> Remove Order </button></a>
                     </div>
                 </div>

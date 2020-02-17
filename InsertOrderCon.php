@@ -19,4 +19,6 @@
     $customerId = $link->GetUserId($_SESSION["Email"]);
 
     $link->WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode);
+
+    header("Location: OrderCheck.php");
 ?>
