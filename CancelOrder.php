@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<head>
-</head>
+<?php
+namespace App;
 
-<body>
-    <p class = "text-center"> Hello All </p>
-</body>
+    require_once "PDO_DB.php";
+    use App\PDO_DB;
 
+    $link = new PDO_DB();
 
-<html>
+    if(isset($_POST["search"]))
+    {
+        $searchItem = $_POST["search"];
+        $orders = $link->QueryDatabase($searchItem);
+    }
+?>

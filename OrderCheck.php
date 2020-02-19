@@ -51,7 +51,7 @@
     <h3 class = "text-center"> Here is a list of incomplete orders </h3>
     <div class = "container">
         <div class = "row mt-5">
-            <?$adminOrders = $link->GetAOrders($admin);
+            <?$adminOrders = $link->GetAOrders();
             if(empty($adminOrders))
             {?>
                 <h4 class = "text-center"> All orders have been delivered </h4>
@@ -63,8 +63,6 @@
                     <div class = "card-body">
                         <h3 class = "card-title text-center" name="orderId"><?php echo $order['Id'];?></h5>
                         <h5 class = "card-subtitle text-center text-muted"><?php echo $order['Description'];?></h5>
-                        <p class = "text-center"><?php echo $order['FirstName'];?></p>
-                        <p class = "text-center"><?php echo $order['Surname'];?></p>
                         <p class = "text-center"><?php echo $order['Email'];?></p>
                         <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                         <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
@@ -91,7 +89,12 @@
                             <h5 class = "card-subtitle text-center text-muted"><?php echo $order['Description'];?></h5>
                             <p class = "text-center"><?php echo $order['ItemDescription'];?></p>
                             <p class = "text-center text-muted"><?php echo $order['DateAdded'];?></p>
-                            <a href = "CancelOrder.php" class = "btn btn-default"> Cancel Order </button></a>
+                            <? if($order['StatusId'] == 3){
+                                
+                            }
+                            else{?>
+                                <a href = "CancelOrder.php?orderId=<?php echo $order['Id'];?>" class = "btn btn-default"> Cancel Order </button></a>
+                            <?}?>
                             <a href = "FullDetails.php" class = "btn btn-default"> View Details </button></a>
                         </div>
                     </div>

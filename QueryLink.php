@@ -9,9 +9,9 @@
     if(isset($_POST["search"]))
     {
         $searchItem = $_POST["search"];
+        $orders = $link->QueryDatabase($searchItem);
     }
-
-    $orders = $link->QueryDatabase($searchItem);
+    
 ?>
 <!DOCTYPE html>
 <head>
@@ -44,6 +44,11 @@
         </div>
     </nav>
 </header>
+<?if(empty($orders))
+{?>
+    <h3 class = "text-center mt-5"> Could not find results for that query </h3>
+<?}
+else{?>
 <div class = "main-section">
     <h3 class = "text-center mt-5"> Here is a list of your queryable items </h3>
         <div class = "container">
@@ -65,5 +70,7 @@
         </div>
     </div>  
 </div>
+<?} ?>
+
 </body>
 </html>

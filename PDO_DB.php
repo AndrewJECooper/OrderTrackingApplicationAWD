@@ -24,7 +24,7 @@ class PDO_DB extends PDO implements IDatabase
     //Methods
     public function GetOrders()
     {
-        $stmt = $this->_link->prepare("SELECT o.Id, o.ItemDescription, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
+        $stmt = $this->_link->prepare("SELECT o.Id, o.ItemDescription, o.StatusId, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
         $stmt->execute();
 
         while($orders = $stmt->fetchAll())
@@ -33,7 +33,7 @@ class PDO_DB extends PDO implements IDatabase
         }
     }
 
-    public function GetAOrders($id)
+    public function GetAOrders()
 	{	
 		$stmt = $this->_link->prepare("SELECT o.Id, u.FirstName, u.Surname, u.Email, o.ItemDescription, os.Description, o.StatusId, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE os.Id != '3' ORDER BY o.DateAdded DESC");
         $stmt->execute();
@@ -47,10 +47,11 @@ class PDO_DB extends PDO implements IDatabase
 
     public function QueryDatabase($query)
     {
-        $stmt = $this->_link->prepare("SELECT * FROM orders WHERE ItemDescription LIKE % ? %");
-        $stmt->execute([$query]);
+        $stmt = $this->_link->prepare("SELECT o.Id, u.FirstName, u.Surname, u.Email, o.ItemDescription, os.Description, o.StatusId, o.DateAdded FROM orders o LEFT JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE o.ItemDescription LIKE '%$query%'");
+        $stmt->execute();
 
-        while($orders = $stmt->fetchAll())
+        
+        $orders = $stmt->fetchAll();
         {
             return $orders;
         }
@@ -68,7 +69,7 @@ class PDO_DB extends PDO implements IDatabase
             $stmt = $this->_link->prepare("UPDATE orders SET StatusId = '3' WHERE Id Like ?");
             $stmt->execute([$orderId]);
         }
-        
+
     }
 
     public function WriteToDatabase($customerId, $statusId, $dateAdded, $description, $address1, $address2, $postcode)
