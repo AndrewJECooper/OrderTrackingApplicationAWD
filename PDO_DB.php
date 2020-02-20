@@ -22,9 +22,11 @@ class PDO_DB extends PDO implements IDatabase
     //Methods for properties
 
     //Methods
+    
+
     public function GetOrders()
     {
-        $stmt = $this->_link->prepare("SELECT o.Id, o.ItemDescription, o.StatusId, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.DateAdded ASC");
+        $stmt = $this->_link->prepare("SELECT o.Id, o.ItemDescription, o.StatusId, os.Description, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE u.Email = '{$_SESSION['Email']}' ORDER BY o.Id DESC");
         $stmt->execute();
 
         while($orders = $stmt->fetchAll())
@@ -51,6 +53,17 @@ class PDO_DB extends PDO implements IDatabase
         $stmt->execute();
 
         
+        $orders = $stmt->fetchAll();
+        {
+            return $orders;
+        }
+    }
+
+    public function FilterOrders($statusId)
+    {
+        $stmt = $this->_link->prepare("SELECT o.Id, u.FirstName, u.Surname, u.Email, o.ItemDescription, os.Description, o.StatusId, o.DateAdded FROM orders o INNER JOIN orderstatus os ON o.StatusId = os.Id INNER JOIN users u ON o.CustomerId = u.Id WHERE os.Id = '$statusId' AND u.Email = '{$_SESSION['Email']}' ");
+        $stmt->execute();
+
         $orders = $stmt->fetchAll();
         {
             return $orders;
