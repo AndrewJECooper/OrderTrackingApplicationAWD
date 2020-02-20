@@ -15,9 +15,11 @@
     <title>Order Tracker | Current Orders </title>
     <meta name = "viewport" content = "width = device-width, initial-scale = 1.0, shrink-to-fit=no">
      <!--Styles -->
-     <link rel="Stylesheet" href="css/bootstrap.min.css">
+     <link rel="Stylesheet" href="css/bootstrap.css">
 
      <!-- Scripts -->
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -31,6 +33,15 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <a class="nav-item nav-link active" href="OrderCheck.php">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="CreateOrder.php">Create Order</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="test.php">In Warehouse</a>
+                        <a class="dropdown-item" href="test.php">In Transit</a>
+                        <a class="dropdown-item" href="test.php">Delivered</a>
+                    <div class="dropdown-divider"></div>
+                    </div>
+                </li>
                 <a class="nav-item nav-link" href="Contact.php">Contact Us</a>
                 <form class="form-inline" action="QueryLink.php" method = "POST">
                     <input class="form-control mr-sm-2" type="search" name = "search" placeholder="Search" aria-label="Search">
@@ -43,8 +54,7 @@
     </nav>
 </header>
 
-    <h1 class = "text-center m-5"> Welcome <?php echo $_SESSION["Email"]; ?> </h1>
-    
+<h1 class = "text-center m-5"> Welcome <?php echo $_SESSION["Email"]; ?> </h1>
 
     <?if($admin == 1)
 		{?>
@@ -111,5 +121,7 @@ else
 {
     header("Location: index.php");
 } ?>
+
+
 </body>
 </html>
